@@ -137,6 +137,10 @@ separate GPUs (`bash training/<model>/run.sh <gpu>`). Per-model recipes, checkpo
 | Multidialect TTS | several | 2.3 | MDC dataset terms | v6 mix |
 | Competition dev set (372 clips) | conversation | 2.6 | competition data | validation; adaptation pass of Whisper, Qwen3-ASR, MERaLiON |
 
+- **Common Voice 26.0 Indonesian is superseded on MDC.** `download_mdc.py` keeps the 26.0 ID the shipped weights were
+  trained on (`cmqinqwef00xonr07z4vbfovw`); if MDC no longer serves it, substitute
+  [Common Voice Scripted Speech 27.0 - Indonesian](https://mozilladatacollective.com/datasets/cmu5wcato00cknq07yjnu14e0)
+  (`cmu5wcato00cknq07yjnu14e0`), a newer release with more clips, so retrained weights will differ slightly.
 - **Weights.** About 46 GB for the eight models and the trigram, plus 18.5 GB for the LLM. Each `run.sh` writes its
   model to `inference/models/<model>/` by default (`OUT=` overrides); intermediate checkpoints stay under
   `$LIT_ROOT/training/`.
