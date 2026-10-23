@@ -1,0 +1,11 @@
+# trained weights are downloaded by inference/download_weights.py (about 65 GB) or produced by training/, never committed
+inference/models/
+inference/vendor_tf/
+inference/vendor_espnet_owsm/
+# run outputs
+work*/
+__pycache__/
+*.pyc
+.cache/
+.venvs/
+environment/.venv/

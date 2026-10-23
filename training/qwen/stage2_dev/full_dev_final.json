@@ -1,0 +1,84 @@
+{
+  "name": "qwen_style_final_full_dev",
+  "seed": 2080,
+  "paths": {
+    "train_manifest": "/home/jovyan/work/Enes/lost_in_transcription/data/processed/qwen_style_aggressive/full_dev_train.jsonl",
+    "train_epoch_manifest": "/home/jovyan/work/Enes/lost_in_transcription/data/processed/qwen_style_aggressive/unused_conv_hold2.jsonl",
+    "val_unseen": "/home/jovyan/work/Enes/lost_in_transcription/data/processed/qwen_style_aggressive/all_dev_by_speaker.jsonl",
+    "val_all": "/home/jovyan/work/Enes/lost_in_transcription/data/processed/qwen_style_aggressive/robust.jsonl",
+    "exp_dir": "/home/jovyan/work/Enes/lost_in_transcription/training/qwen_style_aggressive/exp_final_full_dev"
+  },
+  "model": {
+    "path": "/home/jovyan/work/Enes/lost_in_transcription/training/qwen_v2/models/lora_one_stage_step9000_hf5",
+    "attn_implementation": "sdpa",
+    "gradient_checkpointing": true,
+    "num_decoder_layers": 28
+  },
+  "freeze": {
+    "train_audio_tower": true,
+    "train_projector": true,
+    "lora": {
+      "enabled": true,
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "layer_min": 14
+    }
+  },
+  "data": {
+    "text_key": "text_ref1",
+    "language": "None",
+    "batch_size": 4,
+    "min_duration": 0.5,
+    "max_duration": 40.0,
+    "num_workers": 4,
+    "val_batch_size": 8,
+    "val_max_seconds": 40.0,
+    "max_new_tokens": 256
+  },
+  "sampling": {
+    "seed": 2080,
+    "epoch_samples": 928,
+    "weights": {
+      "style_dev": 0.8,
+      "homostoria": 0.05,
+      "hari": 0.04,
+      "central": 0.04,
+      "jember": 0.02,
+      "slr35": 0.02,
+      "fleurs_jv": 0.01,
+      "cv_id": 0.01,
+      "fleurs_id": 0.01
+    }
+  },
+  "repetition_cap": {
+    "enabled": false,
+    "max_per_text": 1000000,
+    "seed": 2080,
+    "group_key": "text_ref1"
+  },
+  "optim": {
+    "lr_encoder": 1e-06,
+    "lr_projector": 5e-06,
+    "lr_lora": 8e-06,
+    "lr_decoder": 0.0,
+    "betas": [
+      0.9,
+      0.98
+    ],
+    "weight_decay": 0.01,
+    "warmup_steps": 18,
+    "min_lr_ratio": 0.2
+  },
+  "trainer": {
+    "max_steps": 232,
+    "max_epochs": 1,
+    "gradient_clip_val": 1.0,
+    "log_every_n_steps": 10,
+    "val_every_n_steps": 232,
+    "val_all_every": 1,
+    "resume_if_exists": true,
+    "keep_last_after_completion": false,
+    "init_checkpoint": null
+  }
+}

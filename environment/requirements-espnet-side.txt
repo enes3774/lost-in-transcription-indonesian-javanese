@@ -1,0 +1,16 @@
+# ESPnet for the OWSM fine-tune, installed with `pip install --no-deps --target <dir>` next to the train environment
+espnet==202511
+espnet_tts_frontend==0.0.4
+configargparse==1.8.0
+defusedxml==0.7.1
+g2p_en==2.1.0
+h5py==3.16.0
+humanfriendly==10.0
+inflect==7.5.0
+jaconv==0.5.0
+jamo==0.4.1
+kaldiio==2.18.1
+nltk==3.10.3
+torch_complex==0.4.4
+typeguard==4.6.0
+Unidecode==1.4.0

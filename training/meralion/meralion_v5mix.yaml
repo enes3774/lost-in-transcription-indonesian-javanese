@@ -1,0 +1,64 @@
+name: v5mix
+seed: 2026
+paths:
+  manifest_dir: /home/jovyan/work/Enes/lost_in_transcription/data/processed/qwen_v2
+  train_manifest: /home/jovyan/work/Enes/lost_in_transcription/data/processed/qwen_v2/train_pool_v4.jsonl
+  val_unseen: /home/jovyan/work/Enes/lost_in_transcription/data/processed/qwen_v2/robust_val.jsonl
+  val_all: /home/jovyan/work/Enes/lost_in_transcription/data/processed/qwen_v2/competition_dev_eval_only.jsonl
+  exp_dir: /home/jovyan/work/Enes/lost_in_transcription/training/meralion_v1/exp_v5mix
+model:
+  path: /home/jovyan/work/Enes/lost_in_transcription/models/candidates/meralion-3-3b-asr
+  attn_implementation: eager
+  gradient_checkpointing: true
+freeze:
+  lora:
+    enabled: true
+    r: 32
+    alpha: 64
+    dropout: 0.05
+data:
+  text_key: text_ref1
+  batch_size: 4
+  min_duration: 0.5
+  max_duration: 30.0
+  num_workers: 4
+  val_batch_size: 8
+  val_max_seconds: 40.0
+  max_new_tokens: 256
+  spec_augment: true
+  augment: true
+sampling:
+  seed: 2026
+  epoch_samples: 36000
+  weights:
+    jember: 0.19
+    homostoria: 0.13
+    hari: 0.05
+    slr35: 0.19
+    central: 0.08
+    fleurs_jv: 0.07
+    ngapak: 0.05
+    purworejo: 0.03
+    lumajang: 0.03
+    bojonegoro: 0.02
+    cv_id: 0.08
+    fleurs_id: 0.08
+optim:
+  lr_encoder: 1.0e-05
+  lr_projector: 1.0e-05
+  lr_lora: 3.0e-05
+  lr_decoder: 0.0
+  betas:
+  - 0.9
+  - 0.98
+  weight_decay: 0.01
+  warmup_steps: 300
+  min_lr_ratio: 0.05
+trainer:
+  max_steps: 9000
+  max_epochs: 1
+  gradient_clip_val: 1.0
+  log_every_n_steps: 50
+  val_every_n_steps: 3000
+  resume_if_exists: true
+  keep_last_after_completion: false

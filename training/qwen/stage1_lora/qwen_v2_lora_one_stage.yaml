@@ -1,0 +1,59 @@
+name: qwen_v2_lora_one_stage
+seed: 2026
+paths:
+  manifest_dir: /home/jovyan/work/Enes/lost_in_transcription/data/processed/qwen_v2
+  train_manifest: ${paths.manifest_dir}/train_pool_v2.jsonl
+  train_epoch_manifest: ${paths.manifest_dir}/unused.jsonl
+  val_unseen: ${paths.manifest_dir}/robust_val.jsonl
+  val_all: ${paths.manifest_dir}/competition_dev_eval_only.jsonl
+  exp_dir: /home/jovyan/work/Enes/lost_in_transcription/training/qwen_v2/exp_lora_one_stage
+model:
+  path: /kaggle/working/models/Qwen3-ASR-1.7B-hf
+  attn_implementation: sdpa
+  gradient_checkpointing: true
+freeze:
+  train_audio_tower: false
+  train_projector: true
+  lora: {enabled: true, r: 32, alpha: 64, dropout: 0.05}
+data:
+  text_key: text_ref1
+  language: "None"
+  batch_size: 4
+  min_duration: 0.5
+  max_duration: 40.0
+  num_workers: 4
+  val_batch_size: 8
+  val_max_seconds: 40.0
+  max_new_tokens: 256
+sampling:
+  seed: 2026
+  epoch_samples: 36000
+  weights:
+    jember: 0.30
+    homostoria: 0.25
+    slr35: 0.15
+    fleurs_jv: 0.08
+    fleurs_id: 0.04
+    cv_id: 0.08
+    central: 0.05
+    hari: 0.05
+repetition_cap: {enabled: false, max_per_text: 1000000, seed: 2026, group_key: text_ref1}
+optim:
+  lr_encoder: 0.0
+  lr_projector: 1.0e-5
+  lr_lora: 3.0e-5
+  lr_decoder: 0.0
+  betas: [0.9, 0.98]
+  weight_decay: 0.01
+  warmup_steps: 300
+  min_lr_ratio: 0.05
+trainer:
+  max_steps: 9000
+  max_epochs: 1
+  gradient_clip_val: 1.0
+  log_every_n_steps: 50
+  val_every_n_steps: 3000
+  val_all_every: 1
+  resume_if_exists: true
+  keep_last_after_completion: false
+  init_checkpoint: null
