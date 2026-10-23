@@ -117,25 +117,25 @@ rescoring LLM. Each step can also be run on its own; the eight model runs are in
 separate GPUs (`bash training/<model>/run.sh <gpu>`). Per-model recipes, checkpoint choice and export are in
 [`training/README.md`](training/README.md).
 
-**Data sources** (all on Mozilla Data Collective except OpenSLR-35 and FLEURS, which are openly licensed):
+**Data sources** (all on Mozilla Data Collective except OpenSLR-35 and FLEURS, which are openly licensed; licences as listed on each dataset page):
 
 | source | language / style | hours | licence | used by |
 | --- | --- | ---: | --- | --- |
-| OpenSLR-35 Javanese | Javanese, read | 259.5 | CC BY-SA 4.0 | all models |
-| Common Voice 26 Indonesian | Indonesian, read | 33.5 | CC0 | all models |
-| FLEURS Javanese / Indonesian | read | 11.0 / 9.0 | CC BY 4.0 | all models |
-| Jember Javanese Spontaneous Speech | conversation | 9.2 | MDC dataset terms | all models |
-| Homostoria | Indonesian, conversation | 8.2 | MDC dataset terms | all models |
-| Hari Minggoean | Indonesian, conversation | 10.0 | MDC dataset terms | all models |
-| Central Javanese | Central Javanese | 7.1 | MDC dataset terms | all models |
-| TTS Javanese, Ngapak dialect | Ngapak | 10.2 | CC BY-SA 4.0 | v5 / v6 mixes |
-| Bojonegoro Javanese | East Javanese | 8.3 | CC BY-SA 4.0 | v5 / v6 mixes |
-| Purworejo dialect speech | Purworejo | 8.1 | MDC dataset terms | v5 / v6 mixes |
-| Lumajang dialect TTS | Lumajang | 6.0 | MDC dataset terms | v5 / v6 mixes |
-| Javanese TTS of Banyumasan Dialect | Banyumasan | 9.5 | CC BY-SA 4.0 | v6 mix |
-| Gresik / Jombang dialect TTS | Gresik / Jombang | 5.1 / 5.1 | MDC dataset terms | v6 mix |
-| Multidialect TTS | several | 2.3 | MDC dataset terms | v6 mix |
-| Competition dev set (372 clips) | conversation | 2.6 | competition data | validation; adaptation pass of Whisper, Qwen3-ASR, MERaLiON |
+| [OpenSLR-35 Javanese](https://www.openslr.org/35/) | Javanese, read | 259.5 | CC-BY-SA-4.0 | all models |
+| [Common Voice Scripted Speech 26.0 - Indonesian](https://mozilladatacollective.com/datasets/cmqinqwef00xonr07z4vbfovw) (superseded, see below) | Indonesian, read | 33.5 | CC0-1.0 | all models |
+| [FLEURS](https://huggingface.co/datasets/google/fleurs) Javanese / Indonesian | read | 11.0 / 9.0 | CC-BY-4.0 | all models |
+| [Jember Javanese Spontaneous Speech Corpus](https://mozilladatacollective.com/datasets/cmlgm5a94008kny07nz2intus) | conversation | 9.2 | CC-BY-NC-SA-4.0 | all models |
+| [Podcast Homostoria (Indonesia)](https://mozilladatacollective.com/datasets/cmiepnyu1001jo207hzslvb5m) | Indonesian, conversation | 8.2 | CC-BY-SA-4.0 | all models |
+| [Podcast Hari Minggoean (Indonesia)](https://mozilladatacollective.com/datasets/cmhlvswz200fio007c7szypw8) | Indonesian, conversation | 10.0 | CC-BY-SA-4.0 | all models |
+| [TTS Central Javanese](https://mozilladatacollective.com/datasets/cml5bn4k900aame07u0rwidcg) | Central Javanese | 7.1 | CC-BY-SA-4.0 | all models |
+| [TTS Javanese - Ngapak Dialect](https://mozilladatacollective.com/datasets/cmlgmf58l0096nx07tahttd6y) | Ngapak | 10.2 | CC-BY-SA-4.0 | v5 / v6 mixes |
+| [Bojonegoro Javanese TTS](https://mozilladatacollective.com/datasets/cmltnzkug0012mh07k1obic7v) | East Javanese | 8.3 | CC-BY-SA-4.0 | v5 / v6 mixes |
+| [Purworejo Dialect-Javanese Speech Corpus](https://mozilladatacollective.com/datasets/cmtr89ry305csny07rrpxqe9d) | Purworejo | 8.1 | CC-BY-NC-SA-4.0 | v5 / v6 mixes |
+| [TTS Javanese-Lumajang Dialect](https://mozilladatacollective.com/datasets/cml5bgysg00bhkr07g23kewke) | Lumajang | 6.0 | CC-BY-SA-4.0 | v5 / v6 mixes |
+| [Javanese TTS of Banyumasan Dialect](https://mozilladatacollective.com/datasets/cmmamtaf104nemh07xa9e7sdx) | Banyumasan | 9.5 | CC-BY-SA-4.0 | v6 mix |
+| [TTS Javanese-Gresik Dialect](https://mozilladatacollective.com/datasets/cmpwi0ac200zbo007hebmkzqy) / [Jombang Dialect-Javanese TTS](https://mozilladatacollective.com/datasets/cmpo53l5b000pku07cem453ac) | Gresik / Jombang | 5.1 / 5.1 | CC-BY-NC-SA-4.0 | v6 mix |
+| [TTS Javanese - Multidialect](https://mozilladatacollective.com/datasets/cmtimj5tm0045mj07qrjo74gc) | several | 2.3 | CC-BY-NC-SA-4.0 | v6 mix |
+| [Competition dev set](https://mozilladatacollective.com/datasets/cmsxiwqdo000fny07e5fx0yi5) (372 clips) | conversation | 2.6 | CC-BY-SA-4.0 | validation; adaptation pass of Whisper, Qwen3-ASR, MERaLiON |
 
 - **Common Voice 26.0 Indonesian is superseded on MDC.** `download_mdc.py` keeps the 26.0 ID the shipped weights were
   trained on (`cmqinqwef00xonr07z4vbfovw`); if MDC no longer serves it, substitute
